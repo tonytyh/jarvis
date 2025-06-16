@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+
+h1 {text-align: center;}
+
+td {
+.font-weight-light;
+width:auto
+}
+
+
+.negative {
+    background:rgba(255,0,0,0.2);
+}
+
+.positive {
+    background:rgba(0,255,0,0.2);
+}
+
+.zero {
+    background-color:rgba(255,255,255,0.2)
+}
+
+p {
+  font-size: 0.875em; /* 14px/16=0.875em */
+}
+
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+}
+table.table-fit thead th, table.table-fit tfoot th {
+    width: auto !important;
+}
+table.table-fit tbody td, table.table-fit tfoot td {
+    width: auto !important;
+}
+
+tr {
+width: 100%;
+height:10px;                // <-- the rows height
+}
+
+th {
+width: 100%;
+height:10px;                // <-- the rows height
+}
+
+
+</style>
+<body>
+
+<div class="container">
+
+    <div>
+        <h1>{{title}}</h1>
+    </div>
+
+    <div>
+        <p class="bold"> Updated on : {{update_date}}</p>
+    </div>
+
+    <table class="table table.table-condensed" style="width:100%" >
+        <tbody>
+        <thead>
+        <tr>
+            {%for header in table_header%}
+            <th>
+                {{header}}
+            </th>
+            {% endfor %}
+        </tr>
+        </thead>
+
+
+        {% for row in data %}
+        <tr>
+            <td>{{row["name"]}}</td>
+            {% for col in row["value"] %}
+                {% if col > 0 %}
+                <td class="positive">+{{col}}%</td>
+                {% endif%}
+                {% if col == 0 %}
+                <td class="zero">{{col}}%</td>
+                {% endif%}
+                {% if col < 0 %}
+                <td class="negative">{{col}}%</td>
+                {% endif%}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <div>
+        <p class="bold"> Updated on : {{update_date}}</p>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

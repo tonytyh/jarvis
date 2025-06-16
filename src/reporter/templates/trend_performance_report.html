@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<style>
+    h1 {
+        text-align: center;
+    }
+
+
+    p {
+        font-size: 0.875em;
+        /* 14px/16=0.875em */
+    }
+
+    table.table-fit {
+        width: auto !important;
+        table-layout: auto !important;
+    }
+
+    table.table-fit thead th,
+    table.table-fit tfoot th {
+        width: auto !important;
+    }
+
+    table.table-fit tbody td,
+    table.table-fit tfoot td {
+        width: auto !important;
+    }
+
+    tr {
+        height: 10px;
+    }
+    th {
+        height: 10px;
+    }
+
+
+
+</style>
+
+
+<body>
+
+
+<div class="container">
+
+    <div>
+        <h1>{{title}}</h1>
+    </div>
+
+    <div>
+        <p> Updated on : {{update_date}}</p>
+    </div>
+
+    <div>
+        <table class="table table.table-condensed">
+            <tbody>
+            <thead>
+            <th>
+                Symbol
+            </th>
+            <th>
+                Strategy
+            </th>
+            <th>
+                Trend Type
+            </th>
+            <th>
+                Change
+            </th>
+            <th>
+                Date
+            </th>
+            </thead>
+
+            {% for item in data %}
+            <tr>
+                <td><a href='https://finance.yahoo.com/quote/{{item["ticker"]}}/'>{{item["ticker"]}}</a></td>
+                <td>{{item["strategy_name"]}}</td>
+                {%set val = item["trend_type"] %}
+                {%if (val == "Uptrend" or val == "StrongUptrend")%}
+                {%set op = "background:rgba(0,255,0,0.5)"%}
+                <td style={{op}}>{{item["trend_type"]}}</td>
+                <td style={{op}}>+{{item["change_in_ratio"]}}%</td>
+                {% endif %}
+
+                {%set val = item["trend_type"] %}
+                {%if (val == "Downtrend" or val == "StrongDowntrend")%}
+                {%set op = "background:rgba(255,0,0,0.5)"%}
+                <td style={{op}}>{{item["trend_type"]}}</td>
+                <td style={{op}}>{{item["change_in_ratio"]}}%</td>
+                {% endif %}
+                <td>{{item["action_date"]}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<style>
+    h1 {
+        text-align: center;
+    }
+
+
+    p {
+        font-size: 0.875em;
+        /* 14px/16=0.875em */
+    }
+
+    table.table-fit {
+        width: auto !important;
+        table-layout: auto !important;
+    }
+
+    table.table-fit thead th,
+    table.table-fit tfoot th {
+        width: auto !important;
+    }
+
+    table.table-fit tbody td,
+    table.table-fit tfoot td {
+        width: auto !important;
+    }
+
+    tr {
+        height: 10px;
+    }
+    th {
+        height: 10px;
+    }
+
+</style>
+
+
+<body>
+
+
+<div class="container">
+
+    <div>
+        <h1>{{title}}</h1>
+    </div>
+
+    <div>
+        <p> Updated on : {{update_date}}</p>
+    </div>
+
+    <div>
+        <table class="table table.table-condensed">
+            <tbody>
+            <thead>
+            <th>
+                Symbol
+            </th>
+            <th>
+                1 Day
+            </th>
+            <th>
+                1 Week
+            </th>
+            <th>
+                2 Week
+            </th>
+            <th>
+                1 Month
+            </th>
+            <th>
+                3 Month
+            </th>
+            <th>
+                6 Month
+            </th>
+            <th>
+                1 Year
+            </th>
+            </thead>
+
+            <thead>
+            <th>
+
+            </th>
+
+            {%for t in table_header%}
+            <th>
+                {{t}}
+            </th>
+            {% endfor %}
+            </thead>
+
+            {% for item in data %}
+            <tr>
+                <td><a href='https://finance.yahoo.com/quote/{{item["symbol"]}}/'>{{item["symbol"]}}</a></td>
+                {%set val = item["1d"] %}
+                {%set scale = 30%}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+
+                {%set val = item["5d"] %}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+
+                {%set val = item["10d"] %}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+
+                {%set val = item["20d"] %}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+
+                {%set val = item["60d"] %}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+
+                {%set val = item["120d"] %}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+
+                {%set val = item["250d"] %}
+                {% if val > 0 %}
+                {% set op_num = val / scale %}
+                {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+                {% if val == 0 %}
+                <td>{{val}}%</td>
+                {%endif%}
+                {% if val < 0 %}
+                {% set op_num = -val / scale %}
+                {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                <td style={{op}}>{{val}}%</td>
+                {%endif%}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

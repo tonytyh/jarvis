@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{subject}}</title>
+</head>
+
+<body>
+
+
+    <div>
+
+        <div>
+            <h4>{{subject}}</h4>
+        </div>
+
+        <div>
+            <p> Updated on : {{update_date}}</p>
+        </div>
+
+        <div>
+            <table style="border: 1px solid black;border-collapse: collapse; text-align:left; font-size:11px">
+                <tbody>
+                    <thead>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            Symbol
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            Type
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            Change
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            Price
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            Time
+                        </th>
+                    </thead>
+
+                    {% for item in items %}
+                    <tr style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;" ><a href='https://finance.yahoo.com/quote/{{item["symbol"]}}/'>{{item["symbol"]}}</a></td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["type"]}}</td>
+                        {%set col_num = item["change_in_ratio"]|float%}
+                        {% if col_num > 0 %}
+                        {%set op_num = col_num / 5%}
+                        {% set op = "background:rgba(0,255,0," + op_num|string + ")"%}
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left; {{op}}">+{{item["change_in_ratio"]}}%</td>
+                        {% endif %}
+                        {% if col_num < 0 %}
+                        {%set op_num = -col_num / 5%}
+                        {% set op = "background:rgba(255,0,0," + op_num|string + ")"%}
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;{{op}}">{{item["change_in_ratio"]}}%</td>
+                        {% endif %}
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["price"]}}</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;"> {{item["time"]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

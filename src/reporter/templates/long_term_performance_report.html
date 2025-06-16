@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+
+<body>
+
+
+    <div>
+
+        <div>
+            <h4>{{title}}</h4>
+        </div>
+
+        <div>
+            <p> Updated on : {{update_date}}</p>
+        </div>
+
+        <div>
+            <table style="border: 1px solid black;border-collapse: collapse; text-align:left; font-size:11px">
+                <tbody>
+                    <thead>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            Symbol
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            1 Day
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            1 Week
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            2 Week
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            1 Month
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            3 Month
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            6 Month
+                        </th>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            1 Year
+                        </th>
+                    </thead>
+
+                    <thead>
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+
+                        </th>
+
+                        {%for t in table_header%}
+                        <th style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                            {{t}}
+                        </th>
+                        {% endfor %}
+                    </thead>
+
+                    {% for item in data %}
+                    <tr style="border: 1px solid black;border-collapse: collapse; text-align:left;">
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;" ><a href='https://finance.yahoo.com/quote/{{item["symbol"]}}/'>{{item["symbol"]}}</a></td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["1d"]}}%</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["5d"]}}%</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["10d"]}}%</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["20d"]}}%</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["60d"]}}%</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["120d"]}}%</td>
+                        <td style="border: 1px solid black;border-collapse: collapse; text-align:left;">{{item["250d"]}}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
